@@ -8,30 +8,40 @@ function loadRequests() {
 }
 
 // Add a request to the request list
-function addRequestToList(request) {
+function addRequestToList(request, index) {
     const li = document.createElement("li");
     li.className = "list-group-item d-flex justify-content-between align-items-center";
     li.textContent = `${request.subject} - ${request.details} | Status: ${request.status || 'Pending'}`;
 
+    // Create a div to wrap the buttons for alignment
+    const buttonContainer = document.createElement("div");
+    buttonContainer.className = "request-buttons";
+
     // Approve button
     const approveBtn = document.createElement("button");
-    approveBtn.className = "btn btn-success btn-sm ms-2";
+    approveBtn.className = "btn btn-success btn-sm";
     approveBtn.textContent = "Approve";
     approveBtn.onclick = function () {
-        approveRequest(request);
+        approveRequest(index);
     };
 
     // Reject button
     const rejectBtn = document.createElement("button");
-    rejectBtn.className = "btn btn-danger btn-sm ms-2";
+    rejectBtn.className = "btn btn-danger btn-sm";
     rejectBtn.textContent = "Reject";
     rejectBtn.onclick = function () {
-        rejectRequest(request);
+        rejectRequest(index);
     };
 
-    li.appendChild(approveBtn);
-    li.appendChild(rejectBtn);
+    // Append buttons to the button container
+    buttonContainer.appendChild(approveBtn);
+    buttonContainer.appendChild(rejectBtn);
+
+    // Append the button container to the list item
+    li.appendChild(buttonContainer);
     document.getElementById("requestList").appendChild(li);
+}
+
 }
 
 // Approve a request
