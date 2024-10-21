@@ -57,3 +57,4 @@ if response.status_code == 200:
     print("Data saved to google_job_data.csv and google_job_data.json.")
 else:
     print(f"Failed to retrieve the page, status code: {response.status_code}")
+#single o/p
